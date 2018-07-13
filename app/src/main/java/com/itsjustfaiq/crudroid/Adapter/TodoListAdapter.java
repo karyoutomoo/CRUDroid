@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.itsjustfaiq.crudroid.CRU_Activity;
+import com.itsjustfaiq.crudroid.Database.Database;
 import com.itsjustfaiq.crudroid.Model.Item;
 import com.itsjustfaiq.crudroid.R;
 
@@ -45,6 +46,16 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoVi
             intent.putExtra("ITEM", item);
             context.startActivity(intent);
             }
+        });
+        todoViewHolder.imageViewDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Database database = new Database(context);
+                database.deleteItem(item.getId());
+            itemArrayList.clear();
+            itemArrayList.addAll(database.getAll());
+            notifyDataSetChanged();
+        }
         });
     }
 
