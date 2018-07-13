@@ -42,7 +42,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         });
-        // setDummyData();        database = new MyDatabase(MainActivity.this);        todoList.addAll(database.getAll());
+        // setDummyData();
+        database = new Database(MainActivity.this);
+        todoList.addAll(database.getAll());
+
         recyclerView = findViewById(R.id.recyclerView);
         todoListAdapter = new TodoListAdapter(todoList, MainActivity.this);
         recyclerView.setAdapter(todoListAdapter);

@@ -1,5 +1,6 @@
 package com.itsjustfaiq.crudroid;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.itsjustfaiq.crudroid.Database.Database;
 import com.itsjustfaiq.crudroid.Model.Item;
@@ -31,12 +33,17 @@ public class CRU_Activity extends AppCompatActivity {
         textViewName = findViewById(R.id.enter_name);
         textViewPriority = findViewById(R.id.enter_priority);
 
-        if (getIntent() != null)
-        {
-            itemIntent = getIntent().getParcelableExtra("ITEM");
-            textViewName.setText(itemIntent.getName());
-            textViewPriority.setText(String.valueOf(itemIntent.getPriority()));
-            edit = true;
+        try {
+            if (getIntent() != null) {
+                itemIntent = getIntent().getParcelableExtra("ITEM");
+
+                textViewName.setText(itemIntent.getName());
+                textViewPriority.setText(String.valueOf(itemIntent.getPriority()));
+                edit = true;
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
         }
 
 
