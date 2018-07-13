@@ -1,6 +1,7 @@
 package com.itsjustfaiq.crudroid.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.itsjustfaiq.crudroid.CRU_Activity;
 import com.itsjustfaiq.crudroid.Model.Item;
 import com.itsjustfaiq.crudroid.R;
 
@@ -33,8 +35,17 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoVi
 
     @Override
     public void onBindViewHolder(@NonNull TodoViewHolder todoViewHolder, int i) {
-        Item item = itemArrayList.get(i);
+        final Item item = itemArrayList.get(i);
         todoViewHolder.textViewTodo.setText(item.getName());
+
+        todoViewHolder.imageViewEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(context, CRU_Activity.class);
+            intent.putExtra("ITEM", item);
+            context.startActivity(intent);
+            }
+        });
     }
 
     @Override
